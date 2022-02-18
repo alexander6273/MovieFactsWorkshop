@@ -1,25 +1,16 @@
-package com.moviefactsworkshop.repositories;
+package com.moviefactsworkshop;
 
 import com.moviefactsworkshop.models.Movie;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
-public class FileReader
-{
+public class TestTenRandomSortedMovies {
     private Scanner sc = new Scanner(System.in);
     private ArrayList<Movie> allMovies = new ArrayList<>();
-
-    public ArrayList<Movie> getAllMovies() {
-        loadMovies();
-        return allMovies;
-    }
-
-    public void setAllMovies(ArrayList<Movie> allMovies) {
-        this.allMovies = allMovies;
-    }
 
     public Scanner reader(String fileName){
         File file = new File(fileName);
@@ -35,30 +26,34 @@ public class FileReader
 
     public void loadMovies(){
         sc = reader("src/main/resources/static/imdb-data.csv");
-
-        //Skips the first line
         sc.nextLine();
-
         while(sc.hasNextLine()){
-
-            //reading the movie file
             String line = sc.nextLine();
             String[] stringAsArray = line.split(";");
-
-            //instantiating the movie attributes
             int year = Integer.parseInt(stringAsArray[0]);
             int length = Integer.parseInt(stringAsArray[1]);
             String title = stringAsArray[2];
             String subject = stringAsArray[3];
             int popularity = Integer.parseInt(stringAsArray[4]);
-
-            boolean awards = false;
-            if (stringAsArray[5].equals("Yes") ) {
-                awards = true;
-            }
-
+            boolean awards = Boolean.parseBoolean(stringAsArray[5]);
             Movie currentMovie = new Movie(year, length, title, subject, popularity, awards);
             allMovies.add(currentMovie);
         }
+
+    }
+
+    public static void main(String[] args) {
+        TestTenRandomSortedMovies testTenRandomSortedMovies = new TestTenRandomSortedMovies();
+        testTenRandomSortedMovies.loadMovies();
+        ArrayList<Movie> arr10 = new ArrayList<>();
+        Random ran = new Random();
+        System.out.println(testTenRandomSortedMovies.allMovies.size());
+        int run = 0;
+        while (run < 10){
+           int random = ran.nextInt(testTenRandomSortedMovies.allMovies.size());
+           arr10.add(testTenRandomSortedMovies.allMovies.get(random));
+           run ++;
+        }
+        System.out.println(arr10);
     }
 }

@@ -67,8 +67,7 @@ public class Movie
         this.popularity = popularity;
     }
 
-    public boolean isAwards()
-    {
+    public boolean isAwards() {
         return awards;
     }
 
@@ -86,6 +85,6 @@ public class Movie
                 ", subject: " + subject +
                 ", popularity: " + popularity + "%" +
                 ", awards: " + awards +
-                '}';
+                "\n";
     }
 }

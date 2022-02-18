@@ -5,6 +5,7 @@ import com.moviefactsworkshop.models.Movie;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class TestFileReader {
@@ -45,7 +46,14 @@ public class TestFileReader {
     public static void main(String[] args) {
         TestFileReader testFileReader = new TestFileReader();
         testFileReader.loadMovies();
+        Random ran = new Random();
         System.out.println(testFileReader.allMovies.size());
-        System.out.println(testFileReader.allMovies.get(1));
+        int run = 0;
+        while (run < 10){
+            int random = ran.nextInt(testFileReader.allMovies.size());
+            System.out.println(testFileReader.allMovies.get(random).getTitle());
+            run ++;
+        }
+
     }
 }
