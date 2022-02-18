@@ -5,14 +5,16 @@ public class Movie
     private int year;
     private int length;
     private String title;
+    private String subject;
     private int popularity;
     private boolean awards;
 
-    public Movie(int year, int length, String title, int popularity, boolean awards)
+    public Movie(int year, int length, String title, String subject, int popularity, boolean awards)
     {
         this.year = year;
         this.length = length;
         this.title = title;
+        this.subject = subject;
         this.popularity = popularity;
         this.awards = awards;
     }
@@ -47,6 +49,14 @@ public class Movie
         this.title = title;
     }
 
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
     public int getPopularity()
     {
         return popularity;
@@ -73,6 +83,7 @@ public class Movie
         return "Title: " + title +
                 ", year: " + year +
                 ", length: " + length + " minuts" +
+                ", subject: " + subject +
                 ", popularity: " + popularity + "%" +
                 ", awards: " + awards +
                 '}';
