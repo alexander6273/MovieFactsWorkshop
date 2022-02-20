@@ -4,11 +4,12 @@ import com.moviefactsworkshop.models.Movie;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class TestTenRandomSortedMovies {
+public class GenreWithLongestMovieAverage {
     private Scanner sc = new Scanner(System.in);
     private ArrayList<Movie> allMovies = new ArrayList<>();
 
@@ -43,17 +44,37 @@ public class TestTenRandomSortedMovies {
     }
 
     public static void main(String[] args) {
-        TestTenRandomSortedMovies testTenRandomSortedMovies = new TestTenRandomSortedMovies();
-        testTenRandomSortedMovies.loadMovies();
-        ArrayList<Movie> arr10 = new ArrayList<>();
-        Random ran = new Random();
-        System.out.println(testTenRandomSortedMovies.allMovies.size());
-        int run = 0;
-        while (run < 10){
-           int random = ran.nextInt(testTenRandomSortedMovies.allMovies.size());
-           arr10.add(testTenRandomSortedMovies.allMovies.get(random));
-           run ++;
+        GenreWithLongestMovieAverage test = new GenreWithLongestMovieAverage();
+        test.loadMovies();
+        ArrayList<Integer> skip = new ArrayList<>();
+        int currentCount = 0;
+        int finalCount = 0;
+        String longestGenre = "";
+        String title = "";
+
+        for (Movie movies : test.allMovies){
+            if (!skip.contains(test.allMovies.indexOf(movies)) ){
+                for (Movie movie : test.allMovies){
+                    if (movie.getSubject().equals(movies.getSubject())){
+                        currentCount += movie.getLength();
+                        skip.add(test.allMovies.indexOf(movie));
+                        if (currentCount > finalCount)
+                        longestGenre = movie.getSubject();
+                    }
+                }
+            }
+            if (currentCount > finalCount){
+                finalCount = currentCount;
+                currentCount = 0;
+                title = movies.getTitle();
+                //longestGenre = movie.getSubject();
+
+            }
         }
-        System.out.println(arr10);
+        System.out.println(finalCount);
+        System.out.println(title);
+        System.out.println(longestGenre);
+
+        //taget is: length 66318, subject drama
     }
 }

@@ -1,6 +1,6 @@
 package com.moviefactsworkshop.models;
 
-public class Movie
+public class Movie implements Comparable
 {
     private int year;
     private int length;
@@ -74,6 +74,16 @@ public class Movie
     public void setAwards(boolean awards)
     {
         this.awards = awards;
+    }
+
+    @Override
+    public int compareTo(Object other){
+        Movie otherMovie = (Movie) other;
+        if (this.popularity < otherMovie.popularity){
+            return -1;
+        } else {
+            return 1;
+        }
     }
 
     @Override

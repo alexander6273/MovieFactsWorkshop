@@ -3,8 +3,7 @@ package com.moviefactsworkshop.controllers;
 import com.moviefactsworkshop.models.Movie;
 import com.moviefactsworkshop.repositories.FileReader;
 import com.moviefactsworkshop.services.Services;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -29,7 +28,6 @@ public class Controller
         return service.getRandomTitle(fileReader.getAllMovies());
     }
 
-    //TODO: implement sort
     @GetMapping("/getTenSortByPopularity")
     public ArrayList<Movie> sortTenRandomMoviesByPop(){
         return service.tenSortedMoviesByPop(fileReader.getAllMovies());
@@ -40,15 +38,15 @@ public class Controller
         return service.howManyWon(fileReader.getAllMovies());
     }
 
-    //TODO:
+    //TODO:Is it @RequestParam?
     @GetMapping("/filter?char='x'amount='n'")
-    public ArrayList<Movie> moviesWithX_NTimes(){
-        return service.tenSortedMoviesByPop(fileReader.getAllMovies());
+    public ArrayList<Movie> moviesWithX_NTimes(@RequestParam char x, @RequestParam int n){
+        return service.moviesWithXCharNTimes(fileReader.getAllMovies(), x, n);
     }
 
-    //TODO:
+    //TODO:Gives the wrong answer
     @GetMapping("/longest/g1='x'g2='y'")
-    public ArrayList<Movie> genreWithLongestAverage(){
-        return service.tenSortedMoviesByPop(fileReader.getAllMovies());
+    public String genreWithLongestAverage(@RequestParam String x, @RequestParam String y){
+        return service.genreWithLongestMovieAverage(fileReader.getAllMovies(), x, y);
     }
 }

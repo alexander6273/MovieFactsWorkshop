@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TestHowManyMoviesWon {
+public class MoviesWithXCharNTimes {
     private Scanner sc = new Scanner(System.in);
     private ArrayList<Movie> allMovies = new ArrayList<>();
 
@@ -34,29 +34,27 @@ public class TestHowManyMoviesWon {
             String title = stringAsArray[2];
             String subject = stringAsArray[3];
             int popularity = Integer.parseInt(stringAsArray[4]);
-
-            boolean awards = false;
-            if (stringAsArray[5].equals("Yes") ) {
-                awards = true;
-            }
-
+            boolean awards = Boolean.parseBoolean(stringAsArray[5]);
             Movie currentMovie = new Movie(year, length, title, subject, popularity, awards);
             allMovies.add(currentMovie);
         }
+
     }
 
     public static void main(String[] args) {
-        TestHowManyMoviesWon number = new TestHowManyMoviesWon();
-        number.loadMovies();
-
-        int count = 0;
-
-        for (Movie a : number.allMovies) {
-            if (a.isAwards()) {
-                count += 1;
+        MoviesWithXCharNTimes test = new MoviesWithXCharNTimes();
+        test.loadMovies();
+        ArrayList<Movie> moviesThatContainsX = new ArrayList<>();
+        char x = 'e';
+        int n = 1;
+        for (Movie movie : test.allMovies){
+            String X = Character.toString(x);
+            if (movie.getTitle().contains(X)){
+                if (movie.getTitle().chars().filter(ch -> ch == x).count() == n)
+                moviesThatContainsX.add(movie);
             }
         }
-        System.out.println(count);
-
+        System.out.println(moviesThatContainsX);
+        System.out.println(moviesThatContainsX.size());
     }
 }
