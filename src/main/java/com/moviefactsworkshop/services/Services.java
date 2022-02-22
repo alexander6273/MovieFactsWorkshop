@@ -4,14 +4,12 @@ import com.moviefactsworkshop.models.Movie;
 import org.junit.platform.commons.util.ToStringBuilder;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public class Services
 {
     private Random ranGen = new Random();
+    HashMap<String, Integer> amountOfGenresAndLength = new HashMap<>();
 
     public String getFirstMovieTitle(ArrayList<Movie> allMovies){
         return allMovies.get(1).getTitle();
@@ -39,7 +37,6 @@ public class Services
     }
 
     public int howManyWon(ArrayList<Movie> allMovies) {
-        ArrayList<Movie> moviesThatWon = new ArrayList<>();
         int count = 0;
 
         for (Movie a : allMovies) {
@@ -88,4 +85,14 @@ public class Services
         }
         return longestGenre;
     }
+
+    public void listAllGenresWithLength(ArrayList<Movie> allMovies){
+        for (Movie movie : allMovies){
+            amountOfGenresAndLength.put(movie.getSubject(), movie.getLength());
+        }
+    }
+
+    /*public int amountOfGenres(){
+        amountOfGenresAndLength.
+    }*/
 }
